@@ -1,11 +1,21 @@
- 
+
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");
 
-  
+  const brickRowCount = 3;
+  const brickColumnCount = 5;
+  const brickWidth = 75;
+  const brickHeight = 20;
+  const brickPadding = 10;
+  const brickOffsetTop = 30;
+  let brickOffsetLeft;
+
   function resizeCanvas() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.8; 
+    canvas.height = window.innerHeight * 0.8;
+
+    // Center the bricks horizontally
+    brickOffsetLeft = (canvas.width - (brickColumnCount * brickWidth + (brickColumnCount - 1) * brickPadding)) / 2;
   }
   window.addEventListener("resize", resizeCanvas);
   resizeCanvas();
@@ -23,14 +33,6 @@
   let rightPressed = false;
   let leftPressed = false;
 
-  const brickRowCount = 3;
-  const brickColumnCount = 5;
-  const brickWidth = 75;
-  const brickHeight = 20;
-  const brickPadding = 10;
-  const brickOffsetTop = 30;
-  const brickOffsetLeft = 30;
-
   const bricks = [];
   for (let c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
@@ -42,7 +44,6 @@
   let score = 0;
   let lives = 3;
 
-  
   document.addEventListener("keydown", keyDownHandler);
   document.addEventListener("keyup", keyUpHandler);
 
@@ -62,7 +63,6 @@
     }
   }
 
-  
   const leftBtn = document.getElementById("leftBtn");
   const rightBtn = document.getElementById("rightBtn");
 
@@ -164,7 +164,6 @@
     drawLives();
     collisionDetection();
 
-    
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
       dx = -dx;
     }
@@ -200,4 +199,5 @@
     requestAnimationFrame(draw);
   }
 
-  draw();   
+  draw();
+
